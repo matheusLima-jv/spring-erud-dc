@@ -24,14 +24,17 @@ public class MathController {
 	
 	}
 
-	private boolean isNumb(String numberOne) {
-		// TODO Auto-generated method stub
-		return false;
+	private boolean isNumb(String str) {
+		if( str == null) return false;
+		String strNumber = str.replaceAll(",", ".");
+		return strNumber.matches("[-+]?[0-9]*\\.?[0-9]+");
 	}
 
-	private int convertDb(String numberTow) {
-		// TODO Auto-generated method stub
-		return 0;
+	private Double convertDb(String str) {
+		if( str == null) return 0D;
+		String strNumber = str.replaceAll(",", ".");
+		if(isNumb(strNumber)) return Double.parseDouble(strNumber);
+		return 0D;
 	}
 	
 	
