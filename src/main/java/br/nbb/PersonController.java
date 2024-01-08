@@ -19,7 +19,7 @@ import br.nbb.dataVO.v2.PersonVOV2;
 import br.nbb.services.PersonServices;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("api/person/v1")
 public class PersonController {
 	
 	@Autowired
