@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.nbb.dataVO.v1.PersonVO;
+import br.nbb.dataVO.v2.PersonVOV2;
 import br.nbb.exception.MathOpExcep;
 import br.nbb.mapper.DozerMapper;
+import br.nbb.mapper.custom.PersonMapper;
 import br.nbb.model.Person;
 import br.nbb.repositories.PersonRepository;
 
@@ -19,6 +21,9 @@ public class PersonServices {
 	
 	@Autowired
 	PersonRepository repository;
+	
+	@Autowired
+	PersonMapper personMapper;
 
 	public List<PersonVO> findAll() {
 
@@ -43,6 +48,16 @@ public class PersonServices {
 		
 		var entity = DozerMapper.parseObject(person, Person.class);
 		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+		return vo;
+		
+	}
+	
+	public PersonVOV2 createV2(PersonVOV2 person) {
+
+		logger.info("Creating one person! v2 version ****");
+		
+		var entity = personMapper.converteEmPer(person);
+		var vo = personMapper.converteEmVO(repository.save(entity));
 		return vo;
 		
 	}
