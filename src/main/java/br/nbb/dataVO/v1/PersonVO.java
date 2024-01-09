@@ -2,15 +2,21 @@ package br.nbb.dataVO.v1;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonPropertyOrder({"id","firstName","lastName","gender","address"})
 public class PersonVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	private Long id;
+	@JsonProperty("frist_name")
 	private String firstName;
+	@JsonProperty("last_Name")
 	private String lastName;
 	private String address;
+	//@JsonIgnore ignora a saida no jason ** 
 	private String gender;
 	
 	public PersonVO() {}
