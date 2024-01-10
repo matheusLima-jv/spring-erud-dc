@@ -66,7 +66,7 @@ public class PersonServices {
 		
 		logger.info("Updating one person!");
 		
-		var entity = repository.findById(person.getId())
+		var entity = repository.findById(person.getKey())
 			.orElseThrow(() -> new MathOpExcep("No records found for this ID!"));
 
 		entity.setFirstName(person.getFirstName());
@@ -78,11 +78,11 @@ public class PersonServices {
 		return vo;
 	}
 	
-	public void delete(Long id) {
+	public void delete(Long key) {
 		
 		logger.info("Deleting one person!");
 		
-		var entity = repository.findById(id)
+		var entity = repository.findById(key)
 				.orElseThrow(() -> new MathOpExcep("No records found for this ID!"));
 		repository.delete(entity);
 	}
