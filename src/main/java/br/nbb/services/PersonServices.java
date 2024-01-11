@@ -71,20 +71,23 @@ public class PersonServices {
 	}
 	
 	public PersonVO update(PersonVO person) {
-		
-		logger.info("Updating one person!");
-		
-		var entity = repository.findById(person.getKey())
-			.orElseThrow(() -> new MathOpExcep("No records found for this ID!"));
+	    logger.info("Updating one person!");
 
-		entity.setFirstName(person.getFirstName());
-		entity.setLastName(person.getLastName());
-		entity.setAddress(person.getAddress());
-		entity.setGender(person.getGender());
-		
-		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
-		vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
-		return vo;
+	    if (person == null || person.getKey() == null) {
+	        throw new IllegalArgumentException("Person or Person's key cannot be null!");
+	    }
+
+	    var entity = repository.findById(person.getKey())
+	            .orElseThrow(() -> new MathOpExcep("No records found for this ID!"));
+
+	    entity.setFirstName(person.getFirstName());
+	    entity.setLastName(person.getLastName());
+	    entity.setAddress(person.getAddress());
+	    entity.setGender(person.getGender());
+
+	    var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+	    vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+	    return vo;
 	}
 	
 	public void delete(Long key) {

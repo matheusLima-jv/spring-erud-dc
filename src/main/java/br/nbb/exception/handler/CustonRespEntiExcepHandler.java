@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.nbb.exception.ExceptionResponse;
-import br.nbb.exception.MathOpExcep;
+import br.nbb.exception.ReqObjIsNullExcept;
 
 @ControllerAdvice
 @RestController
@@ -26,7 +26,7 @@ public class CustonRespEntiExcepHandler extends ResponseEntityExceptionHandler{
 			
 		}
 	
-	@ExceptionHandler(MathOpExcep.class)
+	@ExceptionHandler(ReqObjIsNullExcept.class)
 	public final ResponseEntity<ExceptionResponse> handleBadReqExep(Exception ex, WebRequest req){
 		
 		ExceptionResponse exp = new ExceptionResponse(new Date(), ex.getMessage(), req.getDescription(false));
