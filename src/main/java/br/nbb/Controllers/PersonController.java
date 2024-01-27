@@ -1,4 +1,4 @@
-package br.nbb;
+package br.nbb.Controllers;
 
 import java.util.List;
 
@@ -62,4 +62,5 @@ public class PersonController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
 }

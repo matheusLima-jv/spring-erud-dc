@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import br.nbb.PersonController;
+import br.nbb.Controllers.PersonController;
 import br.nbb.dataVO.v1.PersonVO;
 import br.nbb.dataVO.v2.PersonVOV2;
 import br.nbb.exception.MathOpExcep;
