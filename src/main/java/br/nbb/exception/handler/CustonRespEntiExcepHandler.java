@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.nbb.exception.ExceptionResponse;
+import br.nbb.exception.InvalidJwtAutExcept;
 import br.nbb.exception.ReqObjIsNullExcept;
 
 @ControllerAdvice
@@ -32,6 +33,15 @@ public class CustonRespEntiExcepHandler extends ResponseEntityExceptionHandler{
 		ExceptionResponse exp = new ExceptionResponse(new Date(), ex.getMessage(), req.getDescription(false));
 		
 		return new ResponseEntity<>(exp, HttpStatus.BAD_REQUEST);
+			
+		}
+	
+	@ExceptionHandler(InvalidJwtAutExcept.class)
+	public final ResponseEntity<ExceptionResponse> handleInvalidJwtAutExcept(Exception ex, WebRequest req){
+		
+		ExceptionResponse exp = new ExceptionResponse(new Date(), ex.getMessage(), req.getDescription(false));
+		
+		return new ResponseEntity<>(exp, HttpStatus.FORBIDDEN);
 			
 		}
 
