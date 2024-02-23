@@ -29,7 +29,7 @@ public class JwtTokenProvider {
 	@Value("${security:jwt:token:secret-key:secret}")
 	private String secretKey = "secret";
 	
-	@Value("${security:jwt:token:expire-lenght:3600000}")
+	@Value("3600000")
 	private long valInMilliseconds = 3600000; //igual a uma hora
 	
 	@Autowired
@@ -52,6 +52,17 @@ public class JwtTokenProvider {
 		var refreshToken = refReshToken(username, roles, now);
 		
 		return new TokenVO(username,true,now,validity,acessToken,refreshToken);
+		
+	}
+	
+	public TokenVO refreshTok(String refreshToken) {
+		if(refreshToken.contains("Bearer ")) refreshToken = refreshToken.substring("Bearer ".length());
+		
+		JWTVerifier verifier = JWT.require(algorithm).build();
+		DecodedJWT decodedJWT = verifier.verify(refreshToken);
+		String username = decodedJWT.getSubject();
+		List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+		return createAcessTok(username, roles);
 		
 	}
 

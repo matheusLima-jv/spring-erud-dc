@@ -44,8 +44,25 @@ public class AuthServices {
 			return ResponseEntity.ok(tokenResponse);
 			
 		} catch (Exception e) {
-			throw new BadCredentialsException(" Invalid Username/password !!! ");
+			throw new BadCredentialsException(" Invalid Username/password !!! " + 
+		credential.getUsername() + credential.getPassword());
 		}
+		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public ResponseEntity refreshToken(String username, String refreshToken) {
+			
+		var user = userRepository.findByUserName(username);
+			
+			var tokenResponse = new TokenVO();
+			if (user != null) {
+				tokenResponse = tokenProvider.refreshTok(refreshToken);
+			} else {
+				throw new UsernameNotFoundException("Username " + username + " Not found!!! ");
+			}
+			
+			return ResponseEntity.ok(tokenResponse);
 		
 	}
 	
