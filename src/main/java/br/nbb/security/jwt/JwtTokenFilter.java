@@ -37,7 +37,11 @@ public class JwtTokenFilter extends GenericFilterBean{
 		}
 		chain.doFilter(request, response);
 	}
-	
+	/*
+	 * a classe JwtTokenFilter é um filtro que intercepta cada requisição HTTP para validar um token JWT. 
+	 * Se o token for válido, ele obtém a autenticação correspondente e a configura no contexto de 
+	 * segurança do Spring Security.
+	 */
 	
 
 }
